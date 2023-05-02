@@ -29,10 +29,10 @@ phases:
   post_build:
     commands:
       - echo Tests completed on `date`
-      - aws s3 cp ./02postman/newman/ s3://${S3_BUCKET}/postman-reports/ --recursive --exclude "*" --include "*.xml"
+      - aws s3 cp ./newman/ s3://${S3_BUCKET}/postman-reports/ --recursive --exclude "*" --include "*.xml"
 
 reports:
-  junitreports:
+  junitReport:
     files:
       - '**/*.xml'
     base-directory: '02postman/newman'
