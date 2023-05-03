@@ -25,6 +25,7 @@ phases:
       - echo Build started on `date` from dir `pwd`
       - newman run PetStoreAPI.postman_collection.json --environment PetStoreAPIEnvironment.postman_environment.json --reporters cli,junit --reporter-junit-export newman-report.xml
 
+
   post_build:
     commands:
       - echo Tests completed on `date`
