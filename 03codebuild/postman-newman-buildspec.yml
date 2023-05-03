@@ -32,8 +32,12 @@ phases:
       - echo Tests completed on `date`
       - aws s3 cp ./newman-report.xml s3://${S3_BUCKET}/postman-reports/
 
+artifacts:
+  files:
+    - '**/*'
+  discard-paths: yes
+
 reports:
-  junitReport:
+  junit:
     files:
-      - '**/newman-report.xml'
-    base-directory: '02postman'
+      - '02postman/newman-report.xml'
