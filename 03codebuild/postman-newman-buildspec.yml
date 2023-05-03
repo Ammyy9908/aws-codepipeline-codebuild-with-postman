@@ -23,16 +23,15 @@ phases:
   build:
     commands:
       - echo Build started on `date` from dir `pwd`
-      - newman run PetStoreAPI.postman_collection.json --environment PetStoreAPIEnvironment.postman_environment.json -r junit --reporters junit --reporter-junit-export newman-report.xml
-
+      - newman run PetStoreAPI.postman_collection.json --environment PetStoreAPIEnvironment.postman_environment.json --reporters cli,junit --reporter-junit-export newman-report.xml
 
   post_build:
     commands:
       - echo Tests completed on `date`
-      - aws s3 cp ./newman/ s3://${S3_BUCKET}/postman-reports/ --recursive --exclude "*" --include "*.xml"
+      - aws s3 cp ./newman-report.xml s3://${S3_BUCKET}/postman-reports/
 
 reports:
   junitReport:
     files:
-      - '**/*.xml'
-    base-directory: '02postman/newman'
+      - '**/newman-report.xml'
+    base-directory: '02postman'
